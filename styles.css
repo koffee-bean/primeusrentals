@@ -64,7 +64,7 @@ img { max-width: 100%; display: block; }
 
 /* Hero */
 .hero { background: var(--sand); overflow: hidden; position: relative; }
-.hero .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: center; min-height: 560px; padding-top: 48px; padding-bottom: 48px; }
+.hero .wrap { display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px; align-items: center; min-height: 560px; padding-top: 48px; padding-bottom: 48px; }
 .hero h1 { max-width: 12ch; }
 .hero-art { position: relative; aspect-ratio: 1; }
 .hero-art .ring { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 30% 30%, var(--cream), var(--sand-2) 70%); box-shadow: var(--shadow); }
@@ -188,3 +188,10 @@ input:focus, textarea:focus, select:focus { outline: 2px solid var(--ink); outli
 .steps.four { grid-template-columns: repeat(4, 1fr); }
 @media (max-width: 960px) { .steps.four { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) { .steps.four { grid-template-columns: 1fr; } }
+
+/* Hero photo */
+.hero-photo { position: relative; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow); aspect-ratio: 4/4.6; background: var(--sand-2); }
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-badge { position: absolute; left: 18px; bottom: 18px; display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px 8px 8px; border-radius: 999px; background: rgba(246,243,236,.92); backdrop-filter: blur(6px); font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink); }
+.hero-badge img { width: 32px; height: 32px; border-radius: 50%; }
+@media (max-width: 860px) { .hero-photo { order: -1; aspect-ratio: 16/10; } }
