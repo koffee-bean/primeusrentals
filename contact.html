@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact | Prime US Rentals</title>
+<meta name="description" content="Request a tour, join the waitlist, or ask Prime US Rentals a question.">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAYFBMVEWsoJVdWVVNSEStl4ZMSES5eXmsl4TZqaX7+/tZVFCpplo8PDz/f3//AACciXl/Hx9EQT65oo7//wA+PDpBPzx/fwCIfG+nkH2ci3zp1L8AAACsloSsl4atl4V9fX2sloUbjfszAAAAIHRSTlMWEd1tnASnCAFeAwUCAegDzeUBi8oCe0OUDADwT84Djar0V60AAAHUSURBVHjaZVMHttswDKMsa3gkf3RT6/63LEBltV9xrLwAJMElejufwS5JdoV8/19u945vHa3gtFHT/OOFICreIBzShjyR+a6leHm49a1UPZ8EUV8GNIQQVKQKKWVouNwIQUcREwZPreBTAZSofRLEcDJPePImx5MxJroj/sR7l3LTVKTjVSn+0hPDHQeBGGH+4YPGAUNfJGcJuNO0c1urcFJK6r7pLkpL+UwI2N26dresJIyPISQEmjK2xV2XZVuWAyESPp0hmJSpGFd1um6g9ElG2vUqYAl5om2QANzhtjRzb1YDxGgkVBImjpRbaxa2d2uAiHl19H+8QaxuWwSD+aJuACWVX8Sd/pipIpdYzEwmIRdv9r07Hnrb4GIWorJE7fc7cEc327Lyx08qRXVkiozXd+YEwkrC0TfnIRT6wpTCVjkr9IZHDwWLEpD+LNTOUqvOEIsRuvW3iF2cliyYHbTDrXcPEX0asQ7tbOicjMcBQXU0DkdmteQ+MIfjYwR3mgL5f+QeHhz63dCQ8Dq0FwqZhOw415HFnoY7GJ7u+n6+CTWkgQxfFoeD2/xcS/3+7Q+2rJ6pf1m96Cv2Zrna6uUvy5ueyytP4CE+2/qnlPK/6/8XlsxJOs2SZVMAAAAASUVORK5CYII=">
+<meta property="og:site_name" content="Prime US Rentals">
+<meta property="og:title" content="Contact | Prime US Rentals">
+<meta property="og:description" content="Request a tour, join the waitlist, or ask Prime US Rentals a question.">
+<meta property="og:image" content="https://primeusrentals.com/logo-mark.png">
+<link rel="canonical" href="https://primeusrentals.com/contact.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Sansita:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="logo-mark-160.png" alt="" width="48" height="48"><b>Prime US Rentals</b></a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var n=document.getElementById('nav');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))"><span></span><span></span><span></span></button>
+    <nav class="nav" id="nav">
+      <a href="index.html">Home</a>
+      <a href="listings.html">Homes</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+      <a class="btn sm" href="contact.html#tour">Request a tour</a>
+    </nav>
+  </div>
+</header>
+<main>
+
+<section class="section sand" style="padding-bottom:40px">
+  <div class="wrap">
+    <div class="eyebrow">Contact</div>
+    <h1 style="font-size:clamp(36px,5vw,60px)">Let's find you a set of keys.</h1>
+    <p class="lede">Tours, questions, or a heads-up before the next home goes public. Pick the form that fits, or email <a href="mailto:support@primeusrentals.com">support@primeusrentals.com</a>.</p>
+  </div>
+</section>
+<section class="section" style="padding-top:40px">
+  <div class="wrap split" style="align-items:start">
+    <div class="panel" id="tour">
+      <div class="eyebrow">Request a tour</div>
+      <h2 style="font-size:30px">Come see it in person</h2>
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input type="hidden" name="form" value="tour">
+        <div class="row">
+          <label>First name <input type="text" name="first_name" required autocomplete="given-name"></label>
+          <label>Last name <input type="text" name="last_name" required autocomplete="family-name"></label>
+        </div>
+        <div class="row">
+          <label>Email <input type="email" name="email" required autocomplete="email"></label>
+          <label>Phone <input type="tel" name="phone" autocomplete="tel"></label>
+        </div>
+        <label>Which home <input type="text" name="home" placeholder="Address or listing name"></label>
+        <label>Times that work <textarea name="times" rows="3" required placeholder="e.g. Sat morning, or any weekday after 5"></textarea></label>
+        <label>Desired move-in
+          <select name="move_in"><option>Within 30 days</option><option>1 to 2 months</option><option>2 to 3 months</option><option>Just looking</option></select>
+        </label>
+        <div><button class="btn" type="submit">Send tour request</button></div>
+        <p class="note">We reply within one business day.</p>
+      </form>
+    </div>
+    <div style="display:grid;gap:24px">
+      <div class="panel" id="waitlist">
+        <div class="eyebrow">Waitlist</div>
+        <h2 style="font-size:30px">Hear about homes first</h2>
+        <p class="note">We email the waitlist a few days before a home goes public. No newsletters, no spam.</p>
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <input type="hidden" name="form" value="waitlist">
+          <label>Email <input type="email" name="email" required autocomplete="email"></label>
+          <label>Where are you looking?
+            <select name="state"><option value="ANY">Anywhere</option><option value="WA">Washington</option><option value="ID">Idaho</option><option value="NV">Nevada</option></select>
+          </label>
+          <label>Bedrooms <select name="beds"><option>Any</option><option>2+</option><option>3+</option><option>4+</option></select></label>
+          <div><button class="btn taupe" type="submit">Join the waitlist</button></div>
+        </form>
+      </div>
+      <div class="panel" id="question">
+        <div class="eyebrow">Anything else</div>
+        <h2 style="font-size:30px">Ask a question</h2>
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <input type="hidden" name="form" value="question">
+          <label>Email <input type="email" name="email" required autocomplete="email"></label>
+          <label>Message <textarea name="message" rows="4" required></textarea></label>
+          <div><button class="btn ghost" type="submit">Send</button></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="index.html"><img src="logo-mark-160.png" alt="" width="48" height="48"><b>Prime US Rentals</b></a>
+        <p style="margin-top:14px;max-width:38ch;color:rgba(246,243,236,.75)">Well-kept single-family homes in Washington, Idaho and Nevada, managed directly by the people who own them.</p>
+        <div class="made">Made by humans</div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="listings.html">Available homes</a>
+        <a href="about.html">About us</a>
+        <a href="contact.html#tour">Request a tour</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <a href="mailto:support@primeusrentals.com">support@primeusrentals.com</a>
+        <a href="contact.html#waitlist">Join the waitlist</a>
+      </div>
+    </div>
+    <div class="legal"><span>&copy; <span id="y"></span> Prime US Rentals. All rights reserved.</span><span>Equal Housing Opportunity</span></div>
+  </div>
+</footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>
