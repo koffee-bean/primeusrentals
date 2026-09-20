@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Available homes | Prime US Rentals</title>
+<meta name="description" content="Homes for rent from Prime US Rentals in Washington, Idaho and Nevada.">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAYFBMVEWsoJVdWVVNSEStl4ZMSES5eXmsl4TZqaX7+/tZVFCpplo8PDz/f3//AACciXl/Hx9EQT65oo7//wA+PDpBPzx/fwCIfG+nkH2ci3zp1L8AAACsloSsl4atl4V9fX2sloUbjfszAAAAIHRSTlMWEd1tnASnCAFeAwUCAegDzeUBi8oCe0OUDADwT84Djar0V60AAAHUSURBVHjaZVMHttswDKMsa3gkf3RT6/63LEBltV9xrLwAJMElejufwS5JdoV8/19u945vHa3gtFHT/OOFICreIBzShjyR+a6leHm49a1UPZ8EUV8GNIQQVKQKKWVouNwIQUcREwZPreBTAZSofRLEcDJPePImx5MxJroj/sR7l3LTVKTjVSn+0hPDHQeBGGH+4YPGAUNfJGcJuNO0c1urcFJK6r7pLkpL+UwI2N26dresJIyPISQEmjK2xV2XZVuWAyESPp0hmJSpGFd1um6g9ElG2vUqYAl5om2QANzhtjRzb1YDxGgkVBImjpRbaxa2d2uAiHl19H+8QaxuWwSD+aJuACWVX8Sd/pipIpdYzEwmIRdv9r07Hnrb4GIWorJE7fc7cEc327Lyx08qRXVkiozXd+YEwkrC0TfnIRT6wpTCVjkr9IZHDwWLEpD+LNTOUqvOEIsRuvW3iF2cliyYHbTDrXcPEX0asQ7tbOicjMcBQXU0DkdmteQ+MIfjYwR3mgL5f+QeHhz63dCQ8Dq0FwqZhOw415HFnoY7GJ7u+n6+CTWkgQxfFoeD2/xcS/3+7Q+2rJ6pf1m96Cv2Zrna6uUvy5ueyytP4CE+2/qnlPK/6/8XlsxJOs2SZVMAAAAASUVORK5CYII=">
+<meta property="og:site_name" content="Prime US Rentals">
+<meta property="og:title" content="Available homes | Prime US Rentals">
+<meta property="og:description" content="Homes for rent from Prime US Rentals in Washington, Idaho and Nevada.">
+<meta property="og:image" content="https://primeusrentals.com/logo-mark.png">
+<link rel="canonical" href="https://primeusrentals.com/listings.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Sansita:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="logo-mark-160.png" alt="" width="48" height="48"><b>Prime US Rentals</b></a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="var n=document.getElementById('nav');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))"><span></span><span></span><span></span></button>
+    <nav class="nav" id="nav">
+      <a href="index.html">Home</a>
+      <a href="listings.html" aria-current="page">Homes</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn sm" href="contact.html#tour">Request a tour</a>
+    </nav>
+  </div>
+</header>
+<main>
+
+<section class="section sand" style="padding-bottom:40px">
+  <div class="wrap">
+    <div class="eyebrow">Homes</div>
+    <h1 style="font-size:clamp(36px,5vw,60px)">What's open right now</h1>
+    <p class="lede">Rent, deposit and lease terms are listed on every home. Request a tour and we'll get back to you within a business day.</p>
+  </div>
+</section>
+<section class="section" style="padding-top:40px">
+  <div class="wrap">
+    <div class="filters" role="group" aria-label="Filter by state">
+      <button data-state="ALL" aria-pressed="true">All</button>
+      <button data-state="WA" aria-pressed="false">Washington</button>
+      <button data-state="ID" aria-pressed="false">Idaho</button>
+      <button data-state="NV" aria-pressed="false">Nevada</button>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty" style="display:none"><h3>Nothing open in this area right now</h3><p class="note">Homes turn over a few times a year. Join the waitlist and we'll email you before anything goes public.</p><a class="btn" href="contact.html#waitlist">Join the waitlist</a></div>
+  </div>
+</section>
+<script src="listings.js"></script><script>
+(function(){
+  var grid=document.getElementById('grid'), empty=document.getElementById('empty'), wrap=document.getElementById('listings-wrap');
+  if(!grid) return;
+  var HOUSE='<svg viewBox="0 0 64 64" fill="none" stroke="#36302A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 30 32 12l22 18"/><path d="M16 27v25h32V27"/><path d="M27 52V38h10v14"/></svg>';
+  var money=function(n){return '$'+Number(n).toLocaleString('en-US');};
+  var label={available:'Available',soon:'Coming soon',leased:'Leased'};
+  function card(l){
+    var photo=l.photo?'<img src="'+l.photo+'" alt="'+l.title+'">':HOUSE;
+    var badge='<span class="badge '+(l.status==='available'?'now':l.status==='soon'?'soon':'')+'">'+(label[l.status]||'')+(l.available?' \u00b7 '+l.available:'')+'</span>';
+    var specs='<span>'+l.beds+' bd</span><span>'+l.baths+' ba</span>'+(l.sqft?'<span>'+Number(l.sqft).toLocaleString('en-US')+' sq ft</span>':'');
+    var apply=l.apply?'<a class="btn sm" href="'+l.apply+'" target="_blank" rel="noopener">Apply</a>':'';
+    return '<article class="card"><div class="photo">'+photo+badge+'</div><div class="body"><div class="where">'+l.city+', '+l.state+'</div><h3>'+l.title+'</h3><div class="specs">'+specs+'</div>'+(l.blurb?'<p class="note" style="margin:0">'+l.blurb+'</p>':'')+'<div class="rent">'+money(l.rent)+' <small>/ month</small></div><div class="cta">'+apply+'<a class="btn sm ghost" href="contact.html#tour">Request a tour</a></div></div></article>';
+  }
+  function render(state){
+    var list=(window.LISTINGS||[]).filter(function(l){return l.status!=='leased' && (state==='ALL'||l.state===state);});
+    if(false) list=list.slice(0,3);
+    grid.innerHTML=list.map(card).join('');
+    if(empty) empty.style.display=list.length?'none':'';
+  }
+  var f=document.querySelectorAll('.filters button');
+  f.forEach(function(b){b.addEventListener('click',function(){f.forEach(function(x){x.setAttribute('aria-pressed','false');});b.setAttribute('aria-pressed','true');render(b.dataset.state);});});
+  var initial=(location.hash||'#ALL').slice(1).toUpperCase(); if(['WA','ID','NV'].indexOf(initial)<0) initial='ALL';
+  f.forEach(function(b){b.setAttribute('aria-pressed', b.dataset.state===initial?'true':'false');});
+  render(initial);
+})();
+</script>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href="index.html"><img src="logo-mark-160.png" alt="" width="48" height="48"><b>Prime US Rentals</b></a>
+        <p style="margin-top:14px;max-width:38ch;color:rgba(246,243,236,.75)">Well-kept single-family homes in Washington, Idaho and Nevada, managed directly by the people who own them.</p>
+        <div class="made">Made by humans</div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="listings.html">Available homes</a>
+        <a href="about.html">About us</a>
+        <a href="contact.html#tour">Request a tour</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <a href="mailto:support@primeusrentals.com">support@primeusrentals.com</a>
+        <a href="contact.html#waitlist">Join the waitlist</a>
+      </div>
+    </div>
+    <div class="legal"><span>&copy; <span id="y"></span> Prime US Rentals. All rights reserved.</span><span>Equal Housing Opportunity</span></div>
+  </div>
+</footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>
