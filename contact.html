@@ -43,32 +43,23 @@
   <div class="wrap split" style="align-items:start">
     <div class="panel" id="tour">
       <div class="eyebrow">Request a tour</div>
-      <h2 style="font-size:30px">Come see it in person</h2>
-      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        <input type="hidden" name="form" value="tour">
-        <div class="row">
-          <label>First name <input type="text" name="first_name" required autocomplete="given-name"></label>
-          <label>Last name <input type="text" name="last_name" required autocomplete="family-name"></label>
-        </div>
-        <div class="row">
-          <label>Email <input type="email" name="email" required autocomplete="email"></label>
-          <label>Phone <input type="tel" name="phone" autocomplete="tel"></label>
-        </div>
-        <label>Which home <input type="text" name="home" placeholder="Address or listing name"></label>
-        <label>Times that work <textarea name="times" rows="3" required placeholder="e.g. Sat morning, or any weekday after 5"></textarea></label>
-        <label>Desired move-in
-          <select name="move_in"><option>Within 30 days</option><option>1 to 2 months</option><option>2 to 3 months</option><option>Just looking</option></select>
-        </label>
-        <div><button class="btn" type="submit">Send tour request</button></div>
-        <p class="note">We reply within one business day.</p>
-      </form>
+      <h2 style="font-size:30px">Pick a time to see it in person</h2>
+      <p class="note">Choose a slot below. You'll get a confirmation by email, and you can reschedule from that email if plans change.</p>
+      <div id="cal-inline" style="width:100%;min-height:560px;overflow:auto"></div>
+      <p class="note">Calendar not loading? <a href="https://cal.com/prime-us-rentals/30min" target="_blank" rel="noopener">Open the booking page</a> or email <a href="mailto:support@primeusrentals.com">support@primeusrentals.com</a>.</p>
+      <script type="text/javascript">
+        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+        Cal("init", "30min", {origin:"https://app.cal.com"});
+        Cal.ns["30min"]("inline", { elementOrSelector:"#cal-inline", config: {"layout":"month_view","theme":"light"}, calLink: "prime-us-rentals/30min" });
+        Cal.ns["30min"]("ui", {"cssVarsPerTheme":{"light":{"cal-brand":"#36302A"}},"hideEventTypeDetails":false,"layout":"month_view"});
+      </script>
     </div>
     <div style="display:grid;gap:24px">
       <div class="panel" id="waitlist">
         <div class="eyebrow">Waitlist</div>
         <h2 style="font-size:30px">Hear about homes first</h2>
         <p class="note">We email the waitlist a few days before a home goes public. No newsletters, no spam.</p>
-        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <form action="https://formspree.io/f/mjykyraz" method="POST">
           <input type="hidden" name="form" value="waitlist">
           <label>Email <input type="email" name="email" required autocomplete="email"></label>
           <label>Where are you looking?
@@ -81,7 +72,7 @@
       <div class="panel" id="question">
         <div class="eyebrow">Anything else</div>
         <h2 style="font-size:30px">Ask a question</h2>
-        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <form action="https://formspree.io/f/mjykyraz" method="POST">
           <input type="hidden" name="form" value="question">
           <label>Email <input type="email" name="email" required autocomplete="email"></label>
           <label>Message <textarea name="message" rows="4" required></textarea></label>
