@@ -33,6 +33,7 @@ If a change does not appear after a minute, the browser is holding the old copy 
 | `CNAME` | The custom domain |
 | `robots.txt`, `sitemap.xml` | Search engine basics |
 | `logo-mark.png`, `logo-mark-160.png` | Logo. The favicon is embedded in each page |
+| `photos/` | Hero photos, and where photos of individual homes belong |
 
 Every page carries its own copy of the header and footer, so a navigation change means
 editing all five.
@@ -69,9 +70,11 @@ then invite visitors to join the waitlist.
 ## Making other changes
 
 - **Copy**: edit the relevant `.html` file directly.
-- **Photos**: upload the image to this repository and point the `src` at it. The hero
-  photos currently use stock images, and each one carries a fallback source so a dead
-  URL never renders as a broken image.
+- **Photos**: every image lives in this repository, so nothing depends on an outside
+  host. The four hero photos are `photos/hero-home.jpg`, `hero-about.jpg`,
+  `hero-contact.jpg` and `hero-homes.jpg`, each 1600px wide. To change one, replace
+  the file, keeping the name, and update the `alt` text on that page to describe the
+  new picture. Home photos go in the same folder and are referenced from `listings.js`.
 - **Brand colors and spacing**: the `:root` block at the top of `styles.css`.
 - **Rolling back**: every change is a commit. Open the file on GitHub, click History,
   and pick an earlier version.
