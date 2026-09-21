@@ -44,14 +44,63 @@
     <div class="panel" id="tour">
       <div class="eyebrow">Request a tour</div>
       <h2 style="font-size:30px">Pick a time to see it in person</h2>
-      <p class="note">Choose a slot below. You'll get a confirmation by email, and you can reschedule from that email if plans change.</p>
-      <div id="cal-inline" style="width:100%;min-height:560px;overflow:auto"></div>
-      <p class="note">Calendar not loading? <a href="https://cal.com/prime-us-rentals/30min" target="_blank" rel="noopener">Open the booking page</a> or email <a href="mailto:support@primeusrentals.com">support@primeusrentals.com</a>.</p>
+      <p class="note">Times shown in <span id="tz-label">your time zone</span>. Pick one and you'll get a confirmation by email.</p>
+      <div id="picker">
+        <div class="days" id="days"></div>
+        <div class="slots" id="slots"></div>
+        <div class="more" id="more" hidden>
+          <label>More times <select id="more-select"><option value="">Choose a time</option></select></label>
+        </div>
+        <p class="note" id="picker-status">Loading open times&hellip;</p>
+      </div>
+      <div id="cal-inline" hidden style="width:100%;min-height:560px;overflow:auto"></div>
+      <p class="note">Nothing that works? <a href="https://cal.com/prime-us-rentals/30min" target="_blank" rel="noopener">See the full calendar</a> or email <a href="mailto:support@primeusrentals.com">support@primeusrentals.com</a>.</p>
       <script type="text/javascript">
         (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
         Cal("init", "30min", {origin:"https://app.cal.com"});
-        Cal.ns["30min"]("inline", { elementOrSelector:"#cal-inline", config: {"layout":"month_view","theme":"light"}, calLink: "prime-us-rentals/30min" });
         Cal.ns["30min"]("ui", {"cssVarsPerTheme":{"light":{"cal-brand":"#36302A"}},"hideEventTypeDetails":false,"layout":"month_view"});
+      </script>
+      <script>
+      (function(){
+        var USER="prime-us-rentals", EVENT="30min", SHOW=5, DAYS=14;
+        var tz=Intl.DateTimeFormat().resolvedOptions().timeZone||"America/Los_Angeles";
+        var tzl=document.getElementById("tz-label"); if(tzl) tzl.textContent=tz.replace(/_/g," ");
+        var daysEl=document.getElementById("days"), slotsEl=document.getElementById("slots"), moreEl=document.getElementById("more"), sel=document.getElementById("more-select"), status=document.getElementById("picker-status");
+        var slotsByDay={}, dayKeys=[];
+        function fmtTime(iso){ return new Date(iso).toLocaleTimeString([], {hour:"numeric", minute:"2-digit", timeZone: tz}); }
+        function fmtDay(key){ var d=new Date(key+"T12:00:00"); return {dow:d.toLocaleDateString([], {weekday:"short"}), day:d.toLocaleDateString([], {month:"short", day:"numeric"})}; }
+        function book(iso, dateKey){
+          var link=USER+"/"+EVENT+"?date="+dateKey+"&slot="+encodeURIComponent(iso)+"&month="+dateKey.slice(0,7);
+          try { Cal.ns["30min"]("modal", {calLink: link, config: {layout:"month_view"}}); }
+          catch(e){ window.open("https://cal.com/"+link, "_blank", "noopener"); }
+        }
+        function renderSlots(key){
+          var list=slotsByDay[key]||[]; slotsEl.innerHTML=""; sel.innerHTML='<option value="">Choose a time</option>';
+          list.slice(0,SHOW).forEach(function(s){ var b=document.createElement("button"); b.type="button"; b.className="slot"; b.textContent=fmtTime(s); b.onclick=function(){ book(s,key); }; slotsEl.appendChild(b); });
+          var rest=list.slice(SHOW);
+          rest.forEach(function(s){ var o=document.createElement("option"); o.value=s; o.textContent=fmtTime(s); sel.appendChild(o); });
+          moreEl.hidden=rest.length===0;
+          sel.onchange=function(){ if(sel.value){ book(sel.value,key); sel.value=""; } };
+          status.textContent=list.length?"":"No open times that day.";
+        }
+        function renderDays(){
+          daysEl.innerHTML="";
+          dayKeys.forEach(function(k,i){ var f=fmtDay(k); var b=document.createElement("button"); b.type="button"; b.className="day"; b.innerHTML="<small>"+f.dow+"</small>"+f.day; b.setAttribute("aria-pressed", i===0?"true":"false");
+            b.onclick=function(){ daysEl.querySelectorAll(".day").forEach(function(x){x.setAttribute("aria-pressed","false");}); b.setAttribute("aria-pressed","true"); renderSlots(k); };
+            daysEl.appendChild(b); });
+          if(dayKeys.length) renderSlots(dayKeys[0]); else { status.textContent="No open times in the next two weeks."; }
+        }
+        function fallback(){
+          document.getElementById("picker").hidden=true; var c=document.getElementById("cal-inline"); c.hidden=false;
+          Cal.ns["30min"]("inline", { elementOrSelector:"#cal-inline", config:{layout:"month_view",theme:"light"}, calLink: USER+"/"+EVENT });
+        }
+        var startD=new Date(); var endD=new Date(Date.now()+DAYS*86400000);
+        var url="https://api.cal.com/v2/slots/available?eventTypeSlug="+EVENT+"&usernameList[]="+USER+"&startTime="+startD.toISOString()+"&endTime="+endD.toISOString()+"&timeZone="+encodeURIComponent(tz);
+        fetch(url).then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); }).then(function(j){
+          var slots=(j.data&&j.data.slots)||{}; Object.keys(slots).sort().forEach(function(k){ var t=slots[k].map(function(x){return x.time;}).filter(function(iso){ return new Date(iso)>new Date(); }); if(t.length){ slotsByDay[k]=t; dayKeys.push(k); } });
+          renderDays();
+        }).catch(function(){ fallback(); });
+      })();
       </script>
     </div>
     <div style="display:grid;gap:24px">
