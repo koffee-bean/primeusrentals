@@ -197,12 +197,9 @@ input:focus, textarea:focus, select:focus { outline: 2px solid var(--ink); outli
 @media (max-width: 860px) { .hero-photo { order: -1; aspect-ratio: 16/10; } }
 
 /* State outlines on area cards */
-.area { display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto; column-gap: 18px; align-items: center; }
-.area b { grid-column: 1; }
-.area span { grid-column: 1; }
-.area .state { grid-column: 2; grid-row: 1 / span 2; width: 96px; height: 96px; fill: none; stroke: var(--taupe-2); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; transition: stroke .2s; }
+.area b { display: flex; align-items: center; gap: 10px; }
+.area .state { width: 30px; height: 30px; flex: none; fill: none; stroke: var(--taupe-2); stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; }
 .area:hover .state { stroke: var(--ink); }
-@media (max-width: 860px) { .area .state { width: 80px; height: 80px; } }
 
 /* Tour time picker */
 .days { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 14px; scrollbar-width: thin; }
