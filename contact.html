@@ -52,7 +52,7 @@
     <div class="panel" id="tour">
       <div class="eyebrow">Request a tour</div>
       <h2 style="font-size:30px">Pick a time to see it in person</h2>
-      <p class="note">Times shown in <span id="tz-label">your time zone</span>. Scroll for more, pick one, and you'll get a confirmation by email.</p>
+      <p class="note">Times shown in <span id="tz-label">your time zone</span>. Scroll sideways for more, pick one, and you'll get a confirmation by email.</p>
       <div id="picker">
         <div class="days" id="days"></div>
         <div class="slots-wrap" id="slots-wrap">
@@ -82,13 +82,13 @@
           catch(e){ window.open("https://cal.com/"+link, "_blank", "noopener"); }
         }
         function updateFade(){
-          var more=slotsEl.scrollHeight - slotsEl.clientHeight - slotsEl.scrollTop > 8;
+          var more=slotsEl.scrollWidth - slotsEl.clientWidth - slotsEl.scrollLeft > 8;
           slotsWrap.classList.toggle("has-more", more);
         }
         slotsEl.addEventListener("scroll", updateFade);
         window.addEventListener("resize", updateFade);
         function renderSlots(key){
-          var list=slotsByDay[key]||[]; slotsEl.innerHTML=""; slotsEl.scrollTop=0;
+          var list=slotsByDay[key]||[]; slotsEl.innerHTML=""; slotsEl.scrollLeft=0;
           list.forEach(function(s){ var b=document.createElement("button"); b.type="button"; b.className="slot"; b.textContent=fmtTime(s); b.onclick=function(){ book(s,key); }; slotsEl.appendChild(b); });
           status.textContent=list.length?"":"No open times that day.";
           updateFade();
