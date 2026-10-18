@@ -16,6 +16,11 @@ run and nothing to deploy.
 
 `CNAME` tells GitHub which domain to serve. Leave it alone unless the domain changes.
 
+Visibility matters here. GitHub Pages serves a **private** repository only on a paid
+plan (Pro, Team or Enterprise). On the free plan, making this repository private turns
+Pages off and the site stops being served at the domain, even though the files are all
+still here. Making it public again restores it.
+
 If a change does not appear after a minute, the browser is holding the old copy of
 `styles.css`. A hard refresh clears it.
 
